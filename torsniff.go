@@ -41,11 +41,11 @@ type torrent struct {
 
 func (t *torrent) String() string {
 	return fmt.Sprintf(
-		"link: %s\nname: %s\nsize: %d\nfile: %d\n",
+		"%s;%d;%d;%s",
 		fmt.Sprintf("magnet:?xt=urn:btih:%s", t.infohashHex),
-		t.name,
 		t.length,
 		len(t.files),
+		t.name,
 	)
 }
 
@@ -170,9 +170,9 @@ func (t *torsniff) work(ac *announcement, tokens chan struct{}) {
 		return
 	}
 
-	if err := t.saveTorrent(ac.infohashHex, meta); err != nil {
+	/*if err := t.saveTorrent(ac.infohashHex, meta); err != nil {
 		return
-	}
+	}*/
 
 	torrent, err := parseTorrent(meta, ac.infohashHex)
 	if err != nil {
